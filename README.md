@@ -4,12 +4,16 @@
 
 ## Getting Started
 
-First, add .env file and your API-s url:
+First, add .env file and your environment variables:
 
 `MONGODB_URI="your-mongo-uri"`
+
 `AWS_ACCESS_KEY_ID="XXXXXXXXXXXXXXXXX"`
+
 `AWS_SECRET_ACCESS_KEY="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"`
+
 `AWS_UXSTUDIO_BUCKET_NAME="XXXXXXXXXXXXXXXXX"`
+
 `NEXT_PUBLIC_UXSTUDIO_API_URL="XXXXXXXXXXXXXXXXX"`
 
 Then run the development server:
