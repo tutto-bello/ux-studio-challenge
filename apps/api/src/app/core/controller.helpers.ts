@@ -39,3 +39,14 @@ export const ApiFile = (fileName = 'file'): MethodDecorator =>
       format: 'binary',
     },
   });
+
+export const ApiMultiFile = (fileName = 'files'): MethodDecorator =>
+  makeFormDataApiBody({
+    [fileName]: {
+      type: 'array',
+      items: {
+        type: 'string',
+        format: 'binary',
+      },
+    },
+  });

@@ -33,7 +33,7 @@ export class ContactController {
     return this.contactRepository.create(createContactDto);
   }
 
-  @Put('/logo-upload')
+  @Put('/img-upload')
   @ApiConsumes('multipart/form-data')
   @ApiFile()
   @UseInterceptors(FileInterceptor('file'))
