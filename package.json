@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "start": "node dist/apps/api/main.js",
     "dev": "nx run-many --target=serve --projects=frontend,api --parallel",
     "build": "nx build api --skip-nx-cache"
   },
