@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchContactImages } from './contact-service';
 import { IContactResponse } from '@ux-studio-challenge/shared';
+import Layout from './components/layout';
 
 const Page = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,12 +20,12 @@ const Page = () => {
   }, []);
 
   return (
-    <div>
+    <Layout>
       {isLoading && <h1>Loading...</h1>}
       {!isLoading &&
         contacts &&
         contacts?.map((c) => <div key={c._id}>{c.name}</div>)}
-    </div>
+    </Layout>
   );
 };
 
