@@ -14,8 +14,8 @@ const StyledButton = (props: ButtonProps) => {
   const matchesMd = useMediaQuery('(min-width:768px)');
 
   return (
-    <Button onClick={onClick} variant="contained">
-      {icon && (matchesLg || !matchesMd) && (
+    <Button onClick={onClick} variant="contained" sx={{ borderRadius: 1000 }}>
+      {icon && matchesLg && (
         <span
           style={{
             marginRight: matchesLg ? '8px' : '0px',
@@ -26,7 +26,7 @@ const StyledButton = (props: ButtonProps) => {
           {icon}
         </span>
       )}
-      <span style={{ minWidth: 'max-content' }}>{matchesMd && label}</span>
+      <span style={{ minWidth: 'max-content' }}>{label}</span>
     </Button>
   );
 };

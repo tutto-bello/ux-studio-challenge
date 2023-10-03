@@ -5,6 +5,7 @@ import {
   Box,
   Grid,
   IconButton,
+  Modal,
   Theme,
   Typography,
 } from '@mui/material';
@@ -15,10 +16,26 @@ import StyledButton from './styled-button';
 import PlusIcon from './icons/plus';
 import BackIcon from './icons/back';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import ContactForm from './contact-form';
+
+const style = {
+  position: 'absolute' as const,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+};
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(darkTheme);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const matchesLg = useMediaQuery('(min-width:1024px)');
+  const matchesSM = useMediaQuery('(min-width:544px)');
 
   const toggleTheme = () => {
     setTheme((prevTheme) =>
@@ -30,13 +47,13 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <Grid container>
         <Grid
           item
-          xs={matchesLg ? 3 : 2}
+          xs={matchesLg ? 3 : 1.5}
           borderBottom={0.5}
           height={matchesLg ? 96 : 72}
         ></Grid>
         <Grid
           item
-          xs={matchesLg ? 6 : 8}
+          xs={matchesLg ? 6 : 9}
           borderBottom={0.5}
           borderLeft={0.5}
           borderRight={0.5}
@@ -44,7 +61,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         ></Grid>
         <Grid
           item
-          xs={matchesLg ? 3 : 2}
+          xs={matchesLg ? 3 : 1.5}
           borderBottom={0.5}
           height={matchesLg ? 96 : 72}
         ></Grid>
@@ -52,7 +69,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <Grid container>
         <Grid
           item
-          xs={matchesLg ? 3 : 2}
+          xs={matchesLg ? 3 : 1.5}
           borderBottom={0.5}
           height={matchesLg ? 96 : 72}
           display="flex"
@@ -67,7 +84,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         </Grid>
         <Grid
           item
-          xs={matchesLg ? 6 : 8}
+          xs={matchesLg ? 6 : 9}
           borderBottom={0.5}
           borderLeft={0.5}
           borderRight={0.5}
@@ -84,7 +101,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
             justifyContent="space-between"
           >
             <IconButton>
-              <SettingsIcon mode={theme.palette.mode} />
+              <Box sx={{ width: '24px', height: '24px' }}>
+                <SettingsIcon mode={theme.palette.mode} />
+              </Box>
             </IconButton>
             <IconButton>
               <Avatar
@@ -93,16 +112,33 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 sx={{ width: '24px', height: '24px' }}
               />
             </IconButton>
-            <StyledButton
-              label="Add new"
-              onClick={() => console.log('click')}
-              icon={<PlusIcon />}
-            />
+            {matchesSM && (
+              <StyledButton
+                label="Add new"
+                onClick={handleOpen}
+                icon={<PlusIcon mode={undefined} />}
+              />
+            )}
+            {!matchesSM && (
+              <IconButton onClick={handleOpen}>
+                <Box
+                  sx={{
+                    width: '24px',
+                    height: '24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <PlusIcon mode={theme.palette.mode} />
+                </Box>
+              </IconButton>
+            )}
           </Box>
         </Grid>
         <Grid
           item
-          xs={matchesLg ? 3 : 2}
+          xs={matchesLg ? 3 : 1.5}
           borderBottom={0.5}
           height={matchesLg ? 96 : 72}
           display="flex"
@@ -114,10 +150,10 @@ const Layout = ({ children }: { children: ReactNode }) => {
       </Grid>
 
       <Grid container>
-        <Grid item xs={matchesLg ? 3 : 2}></Grid>
+        <Grid item xs={matchesLg ? 3 : 1.5}></Grid>
         <Grid
           item
-          xs={matchesLg ? 6 : 8}
+          xs={matchesLg ? 6 : 9}
           borderLeft={0.5}
           borderRight={0.5}
           overflow="auto"
@@ -125,8 +161,14 @@ const Layout = ({ children }: { children: ReactNode }) => {
         >
           <Box>{children}</Box>
         </Grid>
-        <Grid item xs={matchesLg ? 3 : 2}></Grid>
+        <Grid item xs={matchesLg ? 3 : 1.5}></Grid>
       </Grid>
+
+      <Modal open={open} onClose={handleClose}>
+        <Box sx={style}>
+          <ContactForm setOpen={setOpen} />
+        </Box>
+      </Modal>
     </MaterialUIThemeProvider>
   );
 };

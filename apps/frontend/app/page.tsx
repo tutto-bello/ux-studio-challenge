@@ -1,8 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { fetchContactImages } from './contact-service';
+import { fetchContact } from './contact-service';
 import { IContactResponse } from '@ux-studio-challenge/shared';
 import Layout from './components/layout';
+import Contact from './components/contact';
 
 const Page = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -10,7 +11,7 @@ const Page = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchContactImages()
+    fetchContact()
       .then((data) => {
         if (data) {
           setContacts(data);
@@ -24,7 +25,7 @@ const Page = () => {
       {isLoading && <h1>Loading...</h1>}
       {!isLoading &&
         contacts &&
-        contacts?.map((c) => <div key={c._id}>{c.name}</div>)}
+        contacts?.map((c) => <Contact key={c._id} contact={c} />)}
     </Layout>
   );
 };

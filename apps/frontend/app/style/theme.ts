@@ -61,6 +61,10 @@ const lightTheme = createTheme({
     body1: {
       fontFamily: 'Lexend Deca',
     },
+    body2: {
+      fontFamily: 'Lexend Deca',
+      fontSize: 12,
+    },
     button: {
       fontFamily: 'Lexend Deca',
     },
@@ -74,10 +78,96 @@ const lightTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 1000,
+          borderRadius: 8,
           color: '#FFFFFF',
           textTransform: 'capitalize',
           padding: '8px 16px 8px 12px',
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          padding: 10,
+        },
+      },
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          paddingTop: 0,
+          paddingBottom: 0,
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontSize: 14,
+          padding: '12px 10px 12px 10px',
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: 12,
+          paddingBottom: 4,
+          color: '#989898',
+        },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          height: 40,
+          padding: '0px',
+          backgroundColor: '#282828',
+        },
+        formControl: {
+          height: 40,
+          padding: '0px',
+          backgroundColor: '#282828',
+        },
+        root: {
+          height: 40,
+          padding: '0px',
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          height: 40,
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        input: {
+          padding: '0px',
+          fontSize: 14,
+        },
+        root: {
+          height: 40,
+          padding: '8px 12px 8px 12px',
+        },
+      },
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          height: 40,
+          padding: '0px',
         },
       },
     },
@@ -118,6 +208,11 @@ const darkTheme = createTheme({
     body1: {
       fontFamily: 'Lexend Deca',
     },
+    body2: {
+      fontFamily: 'Lexend Deca',
+      fontSize: 12,
+      color: '#989898',
+    },
     button: {
       fontFamily: 'Lexend Deca',
     },
@@ -131,10 +226,100 @@ const darkTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 1000,
+          borderRadius: 8,
           color: '#FFFFFF',
           textTransform: 'capitalize',
           padding: '8px 16px 8px 12px',
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          padding: 10,
+        },
+      },
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          paddingTop: 0,
+          paddingBottom: 0,
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#1E1E1E',
+          fontSize: 14,
+          padding: '12px 10px 12px 10px',
+          '&:hover': {
+            backgroundColor: '#232323',
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: 12,
+          paddingBottom: 4,
+          color: '#989898',
+        },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          height: 40,
+          padding: '0px',
+          backgroundColor: '#282828',
+        },
+        formControl: {
+          height: 40,
+          padding: '0px',
+          backgroundColor: '#282828',
+        },
+        root: {
+          height: 40,
+          padding: '0px',
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          height: 40,
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        input: {
+          padding: '0px',
+          fontSize: 14,
+        },
+        root: {
+          height: 40,
+          padding: '8px 12px 8px 12px',
+        },
+      },
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          height: 40,
+          padding: '0px',
         },
       },
     },
