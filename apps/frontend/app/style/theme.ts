@@ -130,12 +130,10 @@ const lightTheme = createTheme({
         input: {
           height: 40,
           padding: '0px',
-          backgroundColor: '#282828',
         },
         formControl: {
           height: 40,
           padding: '0px',
-          backgroundColor: '#282828',
         },
         root: {
           height: 40,
@@ -183,6 +181,7 @@ const darkTheme = createTheme({
       dark: '#282828',
       contrastText: '#fff',
     },
+    background: { paper: '#141414', default: '#141414' },
   },
   typography: {
     fontFamily: 'Glysa, Lexend Deca',
@@ -221,6 +220,9 @@ const darkTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         html: [{ '@font-face': glyseFont }, { '@font-face': lexendDecaFont }],
+        body: {
+          backgroundColor: '#141414',
+        },
       },
     },
     MuiButton: {
@@ -282,12 +284,15 @@ const darkTheme = createTheme({
         input: {
           height: 40,
           padding: '0px',
-          backgroundColor: '#282828',
+          backgroundColor: 'transparent',
         },
         formControl: {
           height: 40,
           padding: '0px',
           backgroundColor: '#282828',
+          '&.Mui-hover': {
+            borderColor: 'transparent',
+          },
         },
         root: {
           height: 40,
@@ -308,10 +313,23 @@ const darkTheme = createTheme({
         input: {
           padding: '0px',
           fontSize: 14,
+          '&.Mui-focused': {
+            backgroundColor: '#282828',
+          },
         },
         root: {
           height: 40,
           padding: '8px 12px 8px 12px',
+          backgroundColor: '#1E1E1E',
+          '&.Mui-focused': {
+            backgroundColor: '#282828',
+          },
+          '&.Mui-hover': {
+            borderColor: 'transparent',
+          },
+        },
+        notchedOutline: {
+          borderColor: '#282828',
         },
       },
     },

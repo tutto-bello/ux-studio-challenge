@@ -5,22 +5,26 @@ import TextInput from './text-input';
 import { createContact, updateContact } from '../contact-service';
 import { IContact, IContactResponse } from '@ux-studio-challenge/shared';
 import FileInput from './file-input';
+import PhoneInput from './phone-input';
 
 interface ContactFormProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   contact?: IContactResponse;
+  handleFetchContacts: () => void;
 }
 
 const ContactForm = (props: ContactFormProps) => {
-  const { setOpen, contact } = props;
+  const { setOpen, contact, handleFetchContacts } = props;
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(5, 'Min 5 character!')
       .max(100)
       .required('This filed is required!'),
-    email: Yup.string().required('This filed is required!'),
-    phone: Yup.string().required('This filed is required!'),
+    email: Yup.string().email(),
+    phone: Yup.string()
+      .min(10, 'Min 10 character!')
+      .required('This filed is required!'),
   });
 
   const initialValues = {
@@ -41,6 +45,7 @@ const ContactForm = (props: ContactFormProps) => {
           favorite: false,
           imgUrl: values.imgUrl,
         });
+        handleFetchContacts();
         setOpen(false);
       } catch (error) {
         console.error(error);
@@ -54,6 +59,7 @@ const ContactForm = (props: ContactFormProps) => {
           favorite: false,
           imgUrl: values.imgUrl,
         });
+        handleFetchContacts();
         setOpen(false);
       } catch (error) {
         console.error(error);
@@ -71,7 +77,14 @@ const ContactForm = (props: ContactFormProps) => {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        {({ isSubmitting, setFieldValue, values, errors, handleChange }) => (
+        {({
+          isSubmitting,
+          setFieldValue,
+          values,
+          errors,
+          handleChange,
+          touched,
+        }) => (
           <Form>
             <FileInput setFieldValue={setFieldValue} values={values} />
             <TextInput
@@ -82,8 +95,9 @@ const ContactForm = (props: ContactFormProps) => {
               placeholder="Joh Doe"
               value={values.name}
               handleChange={handleChange}
+              form={{ errors: errors, touched: touched }}
             />
-            <TextInput
+            <PhoneInput
               id="phone"
               name="phone"
               label="Phone number"
@@ -91,6 +105,7 @@ const ContactForm = (props: ContactFormProps) => {
               placeholder="+36 30 567 8932"
               value={values.phone}
               handleChange={handleChange}
+              form={{ errors: errors, touched: touched }}
             />
             <TextInput
               id="email"
@@ -100,6 +115,7 @@ const ContactForm = (props: ContactFormProps) => {
               placeholder="joh.doe@gmail.com"
               value={values.email}
               handleChange={handleChange}
+              form={{ errors: errors, touched: touched }}
             />
 
             <Box mt={6} ml="auto" width="max-content">

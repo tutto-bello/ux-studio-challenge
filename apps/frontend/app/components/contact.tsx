@@ -19,7 +19,15 @@ import DeleteIcon from './icons/delete';
 import FavoriteIcon from './icons/favorite';
 import { deleteContact } from '../contact-service';
 
-const Contact = ({ contact }: { contact: IContactResponse }) => {
+const Contact = ({
+  contact,
+  handleFetchContacts,
+  handleEdit,
+}: {
+  contact: IContactResponse;
+  handleFetchContacts: () => void;
+  handleEdit: (contact: IContactResponse) => void;
+}) => {
   const matchesSM = useMediaQuery('(min-width:544px)');
   const [show, setShow] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -33,17 +41,19 @@ const Contact = ({ contact }: { contact: IContactResponse }) => {
 
   const handleDelete = () => {
     deleteContact(contact._id);
+    handleFetchContacts();
     handleClose();
   };
 
   return (
     <Box
       display="flex"
-      alignItems="center"
-      justifyContent="space-between"
+      alignItems={matchesSM ? 'center' : 'start'}
+      justifyContent={matchesSM ? 'space-between' : 'start'}
+      flexDirection={matchesSM ? 'row' : 'column'}
       onMouseOver={() => setShow(true)}
       onMouseOut={() => setShow(false)}
-      mb="24px"
+      mb={matchesSM ? '24px' : '0px'}
     >
       <Box display="flex" alignItems="center">
         <Avatar
@@ -56,7 +66,7 @@ const Contact = ({ contact }: { contact: IContactResponse }) => {
         </Box>
       </Box>
       <motion.div animate={{ opacity: show ? 1 : 0 }}>
-        <Box width={matchesSM ? '100%' : 'min-content'}>
+        <Box>
           <IconButton>
             <MuteIcon mode={useTheme().palette.mode} />
           </IconButton>
@@ -93,7 +103,7 @@ const Contact = ({ contact }: { contact: IContactResponse }) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose} sx={{ width: 219 }}>
+        <MenuItem onClick={() => handleEdit(contact)} sx={{ width: 219 }}>
           <SettingsLittleIcon mode={useTheme().palette.mode} />
           <span style={{ marginLeft: 12 }}>Edit</span>
         </MenuItem>

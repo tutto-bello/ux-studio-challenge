@@ -83,7 +83,7 @@ const FileInput = ({
         src={values.imgUrl ? values.imgUrl : '/assets/contact-default.png'}
         alt="Profil photo"
         sizes="large"
-        sx={{ width: 88, height: 88, marginRight: '24px' }}
+        sx={{ width: 88, height: 88, marginRight: '14px' }}
       />
       <motion.div
         whileHover={{
@@ -97,11 +97,13 @@ const FileInput = ({
             justifyContent: 'center',
             alignItems: 'center',
             padding: '8px 16px 8px 12px',
+            paddingLeft: 16,
             borderRadius: 8,
             backgroundColor: '#2D2D2D',
             cursor: 'pointer',
             fontSize: 14,
             height: '40px',
+            color: 'white',
           }}
         >
           <input

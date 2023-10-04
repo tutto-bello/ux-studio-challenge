@@ -18,18 +18,13 @@ import BackIcon from './icons/back';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import ContactForm from './contact-form';
 
-const style = {
-  position: 'absolute' as const,
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-};
-
-const Layout = ({ children }: { children: ReactNode }) => {
+const Layout = ({
+  children,
+  handleFetchContacts,
+}: {
+  children: ReactNode;
+  handleFetchContacts: () => void;
+}) => {
   const [theme, setTheme] = useState<Theme>(darkTheme);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -48,21 +43,24 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <Grid
           item
           xs={matchesLg ? 3 : 1.5}
-          borderBottom={0.5}
+          borderBottom={1}
           height={matchesLg ? 96 : 72}
+          sx={{ borderColor: '#282828' }}
         ></Grid>
         <Grid
           item
           xs={matchesLg ? 6 : 9}
-          borderBottom={0.5}
-          borderLeft={0.5}
-          borderRight={0.5}
+          borderBottom={1}
+          borderLeft={1}
+          borderRight={1}
+          sx={{ borderColor: '#282828' }}
           height={matchesLg ? 96 : 72}
         ></Grid>
         <Grid
           item
           xs={matchesLg ? 3 : 1.5}
-          borderBottom={0.5}
+          borderBottom={1}
+          sx={{ borderColor: '#282828' }}
           height={matchesLg ? 96 : 72}
         ></Grid>
       </Grid>
@@ -70,7 +68,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <Grid
           item
           xs={matchesLg ? 3 : 1.5}
-          borderBottom={0.5}
+          borderBottom={1}
+          sx={{ borderColor: '#282828' }}
           height={matchesLg ? 96 : 72}
           display="flex"
           paddingX={matchesLg ? '24px' : '6px'}
@@ -85,9 +84,10 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <Grid
           item
           xs={matchesLg ? 6 : 9}
-          borderBottom={0.5}
-          borderLeft={0.5}
-          borderRight={0.5}
+          borderBottom={1}
+          borderLeft={1}
+          borderRight={1}
+          sx={{ borderColor: '#282828' }}
           height={matchesLg ? 96 : 72}
           display="flex"
           justifyContent="space-between"
@@ -139,7 +139,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <Grid
           item
           xs={matchesLg ? 3 : 1.5}
-          borderBottom={0.5}
+          borderBottom={1}
+          sx={{ borderColor: '#282828' }}
           height={matchesLg ? 96 : 72}
           display="flex"
           paddingX={matchesLg ? '24px' : '6px'}
@@ -148,25 +149,39 @@ const Layout = ({ children }: { children: ReactNode }) => {
           <ThemeToggle toggleTheme={toggleTheme} />
         </Grid>
       </Grid>
-
       <Grid container>
         <Grid item xs={matchesLg ? 3 : 1.5}></Grid>
         <Grid
           item
           xs={matchesLg ? 6 : 9}
-          borderLeft={0.5}
-          borderRight={0.5}
-          overflow="auto"
+          borderLeft={1}
+          borderRight={1}
+          sx={{ borderColor: '#282828', minHeight: '100vh' }}
+          borderBottom={0}
           padding={matchesLg ? '24px' : '6px'}
         >
-          <Box>{children}</Box>
+          <Box height="100%">{children}</Box>
         </Grid>
         <Grid item xs={matchesLg ? 3 : 1.5}></Grid>
       </Grid>
-
       <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
-          <ContactForm setOpen={setOpen} />
+        <Box
+          sx={{
+            position: 'absolute' as const,
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: matchesSM ? 364 : 300,
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: '24px',
+            borderRadius: '8px',
+          }}
+        >
+          <ContactForm
+            setOpen={setOpen}
+            handleFetchContacts={handleFetchContacts}
+          />
         </Box>
       </Modal>
     </MaterialUIThemeProvider>

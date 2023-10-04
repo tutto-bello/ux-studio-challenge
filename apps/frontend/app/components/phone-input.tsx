@@ -1,8 +1,33 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TextField, InputLabel, Box } from '@mui/material';
-import { FormikErrors } from 'formik';
 import React, { ChangeEvent } from 'react';
+import { IMaskInput } from 'react-imask';
 
-const TextInput = ({
+interface CustomProps {
+  onChange: (event: { target: { name: string; value: string } }) => void;
+  name: string;
+}
+
+const TextMaskCustom = React.forwardRef<HTMLElement, CustomProps>(
+  function TextMaskCustom(props) {
+    const { onChange, ...other } = props;
+    return (
+      <IMaskInput
+        {...other}
+        mask="+00 00 000 0000"
+        definitions={{
+          '#': /[1-9]/,
+        }}
+        onAccept={(value: any) =>
+          onChange({ target: { name: props.name, value } })
+        }
+        overwrite
+      />
+    );
+  }
+);
+
+const PhoneInput = ({
   id,
   type,
   label,
@@ -41,6 +66,7 @@ const TextInput = ({
           </InputLabel>
         )}
       </Box>
+
       <TextField
         id={id}
         name={name}
@@ -50,7 +76,7 @@ const TextInput = ({
         InputLabelProps={{ shrink: true }}
         placeholder={placeholder}
         value={value}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e)}
         error={hasError}
         fullWidth
         sx={{
@@ -65,9 +91,12 @@ const TextInput = ({
             },
           },
         }}
+        InputProps={{
+          inputComponent: TextMaskCustom as any,
+        }}
       />
     </Box>
   );
 };
 
-export default TextInput;
+export default PhoneInput;
