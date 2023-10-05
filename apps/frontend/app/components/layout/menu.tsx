@@ -13,6 +13,7 @@ import SettingsIcon from '../icons/settings';
 import ThemeToggle from '../material-ui-theme-toggle';
 import StyledButton from '../styled-button';
 import Image from 'next/image';
+import { handleWarning } from '../../contact-service';
 
 const Menu = ({
   toggleTheme,
@@ -23,10 +24,6 @@ const Menu = ({
 }) => {
   const matchesLg = useMediaQuery('(min-width:1024px)');
   const matchesSM = useMediaQuery('(min-width:544px)');
-
-  const handleWarn = () => {
-    alert('Sorry, but the design did not specify what should happen here.');
-  };
 
   return (
     <Grid container>
@@ -42,7 +39,7 @@ const Menu = ({
         flexDirection="column"
         justifyContent="center"
       >
-        <IconButton onClick={handleWarn}>
+        <IconButton onClick={handleWarning}>
           <BackIcon mode={useTheme().palette.mode} />
         </IconButton>
       </Grid>
@@ -65,12 +62,12 @@ const Menu = ({
           width={matchesLg ? 232 : 'min-content'}
           justifyContent="space-between"
         >
-          <IconButton onClick={handleWarn}>
+          <IconButton onClick={handleWarning}>
             <Box sx={{ width: '24px', height: '24px' }}>
               <SettingsIcon mode={useTheme().palette.mode} />
             </Box>
           </IconButton>
-          <IconButton onClick={handleWarn}>
+          <IconButton onClick={handleWarning}>
             <Image
               src="/assets/user.png"
               alt="User"

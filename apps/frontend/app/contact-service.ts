@@ -46,3 +46,9 @@ export const deleteContact = async (id: string) => {
     console.error('Error deleting data:', error);
   }
 };
+
+export const handleWarning = () => {
+  toast.warning(
+    'Sorry, but the design did not specify what should happen here.'
+  );
+};

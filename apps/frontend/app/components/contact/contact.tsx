@@ -16,7 +16,7 @@ import MoreIcon from '../icons/more';
 import SettingsLittleIcon from '../icons/settings-little';
 import DeleteIcon from '../icons/delete';
 import FavoriteIcon from '../icons/favorite';
-import { deleteContact } from '../../contact-service';
+import { deleteContact, handleWarning } from '../../contact-service';
 import Image from 'next/image';
 
 const Contact = ({
@@ -76,10 +76,10 @@ const Contact = ({
       </Box>
       <motion.div animate={{ opacity: show ? 1 : 0 }}>
         <Box>
-          <IconButton>
+          <IconButton onClick={handleWarning}>
             <MuteIcon mode={useTheme().palette.mode} />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={handleWarning}>
             <Box
               width={24}
               height={24}
@@ -116,7 +116,7 @@ const Contact = ({
           <SettingsLittleIcon mode={useTheme().palette.mode} />
           <span style={{ marginLeft: 12 }}>Edit</span>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleWarning}>
           <FavoriteIcon mode={useTheme().palette.mode} />
           <span style={{ marginLeft: 12 }}>Favorite</span>
         </MenuItem>
