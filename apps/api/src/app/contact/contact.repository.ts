@@ -62,25 +62,37 @@ export class ContactRepository {
 
     await contact.save();
 
-    this.findAll();
+    return this.findAll();
   }
 
-  async findAll() {
-    return this.contactModel.find();
-  }
-
-  async findOne(id: string) {
-    const contacts = await this.contactModel.findOne({
+  async favorite(id: string) {
+    const contact = await this.contactModel.findOne({
       _id: id,
     });
 
-    if (!contacts) {
+    contact.favorite = !contact.favorite;
+
+    await contact.save();
+
+    return this.findAll();
+  }
+
+  async findAll() {
+    return this.contactModel.find().sort({ favorite: 'desc' });
+  }
+
+  async findOne(id: string) {
+    const contact = await this.contactModel.findOne({
+      _id: id,
+    });
+
+    if (!contact) {
       throw new BadRequestException(
         'There is no such contact, or you are not entitled to it!'
       );
     }
 
-    return contacts;
+    return contact;
   }
 
   dropCollection() {

@@ -36,6 +36,17 @@ export const updateContact = async (id: string, data: IContact) => {
   }
 };
 
+export const updateFavorite = async (id: string) => {
+  try {
+    const response = axios.put(baseUrl + `/favorite/${id}`);
+    toast.success(`Favorite update succesfully!`);
+    return response;
+  } catch (error) {
+    toast.error(`Error updating data: ${error}`);
+    console.error('Error updating data:', error);
+  }
+};
+
 export const deleteContact = async (id: string) => {
   try {
     const response = axios.delete(baseUrl + `/${id}`);

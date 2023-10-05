@@ -16,7 +16,11 @@ import MoreIcon from '../icons/more';
 import SettingsLittleIcon from '../icons/settings-little';
 import DeleteIcon from '../icons/delete';
 import FavoriteIcon from '../icons/favorite';
-import { deleteContact, handleWarning } from '../../contact-service';
+import {
+  deleteContact,
+  handleWarning,
+  updateFavorite,
+} from '../../contact-service';
 import Image from 'next/image';
 
 const Contact = ({
@@ -41,9 +45,19 @@ const Contact = ({
 
   const handleDelete = async () => {
     try {
+      handleClose();
       await deleteContact(contact._id);
       handleFetchContacts();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleFavorite = async () => {
+    try {
       handleClose();
+      await updateFavorite(contact._id);
+      handleFetchContacts();
     } catch (error) {
       console.error(error);
     }
@@ -116,10 +130,20 @@ const Contact = ({
           <SettingsLittleIcon mode={useTheme().palette.mode} />
           <span style={{ marginLeft: 12 }}>Edit</span>
         </MenuItem>
-        <MenuItem onClick={handleWarning}>
-          <FavoriteIcon mode={useTheme().palette.mode} />
-          <span style={{ marginLeft: 12 }}>Favorite</span>
-        </MenuItem>
+        <motion.div
+          whileTap={{
+            scale: 2,
+            transition: { duration: 1 },
+          }}
+        >
+          <MenuItem onClick={handleFavorite}>
+            <FavoriteIcon
+              favorite={contact.favorite}
+              mode={useTheme().palette.mode}
+            />
+            <span style={{ marginLeft: 12 }}>Favorite</span>
+          </MenuItem>
+        </motion.div>
         <MenuItem onClick={handleDelete}>
           <DeleteIcon mode={useTheme().palette.mode} />
           <span style={{ marginLeft: 12 }}>Remove</span>

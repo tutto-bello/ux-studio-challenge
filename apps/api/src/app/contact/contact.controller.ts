@@ -61,10 +61,15 @@ export class ContactController {
   @Put('/:id')
   @ApiParam({ name: 'id' })
   @ApiBody({ type: UpdateContactDto })
-  updateClinc(
+  updateContact(
     @Param() params: IdParams,
     @Body() createContactDto: UpdateContactDto
   ) {
     return this.contactRepository.update(params.id, createContactDto);
+  }
+  @Put('/favorite/:id')
+  @ApiParam({ name: 'id' })
+  updateFavorite(@Param() params: IdParams) {
+    return this.contactRepository.favorite(params.id);
   }
 }
