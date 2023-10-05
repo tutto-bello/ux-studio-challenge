@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { IContactResponse } from '@ux-studio-challenge/shared';
 import {
-  Avatar,
   Box,
   IconButton,
   Menu,
@@ -11,13 +10,14 @@ import {
   useTheme,
 } from '@mui/material';
 import { motion } from 'framer-motion';
-import MuteIcon from './icons/mute';
-import HeadphoneIcon from './icons/headphone';
-import MoreIcon from './icons/more';
-import SettingsLittleIcon from './icons/settings-little';
-import DeleteIcon from './icons/delete';
-import FavoriteIcon from './icons/favorite';
-import { deleteContact } from '../contact-service';
+import MuteIcon from '../icons/mute';
+import HeadphoneIcon from '../icons/headphone';
+import MoreIcon from '../icons/more';
+import SettingsLittleIcon from '../icons/settings-little';
+import DeleteIcon from '../icons/delete';
+import FavoriteIcon from '../icons/favorite';
+import { deleteContact } from '../../contact-service';
+import Image from 'next/image';
 
 const Contact = ({
   contact,
@@ -39,10 +39,14 @@ const Contact = ({
     setAnchorEl(null);
   };
 
-  const handleDelete = () => {
-    deleteContact(contact._id);
-    handleFetchContacts();
-    handleClose();
+  const handleDelete = async () => {
+    try {
+      await deleteContact(contact._id);
+      handleFetchContacts();
+      handleClose();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -56,9 +60,14 @@ const Contact = ({
       mb={matchesSM ? '24px' : '0px'}
     >
       <Box display="flex" alignItems="center">
-        <Avatar
+        <Image
           src={contact.imgUrl ? contact.imgUrl : '/assets/contact-default.png'}
           alt={contact.name}
+          width={40}
+          height={40}
+          style={{ borderRadius: '100%', objectFit: 'cover' }}
+          placeholder="blur"
+          blurDataURL="/assets/contact-default.png"
         />
         <Box ml={2}>
           <Typography variant="body1">{contact.name}</Typography>

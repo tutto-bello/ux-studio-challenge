@@ -11,10 +11,23 @@ interface ButtonProps {
 const StyledButton = (props: ButtonProps) => {
   const { label, icon, onClick } = props;
   const matchesLg = useMediaQuery('(min-width:1024px)');
-  const matchesMd = useMediaQuery('(min-width:768px)');
 
   return (
-    <Button onClick={onClick} variant="contained" sx={{ borderRadius: 1000 }}>
+    <Button
+      onClick={onClick}
+      variant="contained"
+      sx={{
+        borderRadius: 1000,
+        backgroundImage:
+          'linear-gradient(to bottom, #282828 70%, #3C3C3C 100%)',
+        border: '1px solid #3C3C3C',
+        ':hover': {
+          opacity: 0.8,
+          transitionDuration: '200ms',
+          transitionProperty: 'opacity',
+        },
+      }}
+    >
       {icon && matchesLg && (
         <span
           style={{

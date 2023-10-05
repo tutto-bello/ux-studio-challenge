@@ -12,6 +12,16 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ux-studio-challenge.s3.eu-central-1.amazonaws.com',
+        port: '',
+        pathname: '**',
+      },
+    ],
+  },
 };
 
 const plugins = [

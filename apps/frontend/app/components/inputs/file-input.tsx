@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Avatar, Box, Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import axios from 'axios';
 import { FormikErrors } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import PlusIcon from './icons/plus';
-import ChangeIcon from './icons/change';
-import DeleteIcon from './icons/delete';
+import PlusIcon from '../icons/plus';
+import ChangeIcon from '../icons/change';
+import DeleteIcon from '../icons/delete';
+import Image from 'next/image';
 
 const FileInput = ({
   setFieldValue,
@@ -79,11 +80,18 @@ const FileInput = ({
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-      <Avatar
+      <Image
         src={values.imgUrl ? values.imgUrl : '/assets/contact-default.png'}
         alt="Profil photo"
-        sizes="large"
-        sx={{ width: 88, height: 88, marginRight: '14px' }}
+        width={88}
+        height={88}
+        style={{
+          borderRadius: '100%',
+          marginRight: '14px',
+          objectFit: 'cover',
+        }}
+        placeholder="blur"
+        blurDataURL="/assets/contact-default.png"
       />
       <motion.div
         whileHover={{

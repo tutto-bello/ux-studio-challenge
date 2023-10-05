@@ -1,11 +1,11 @@
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, Typography } from '@mui/material';
-import TextInput from './text-input';
-import { createContact, updateContact } from '../contact-service';
+import TextInput from '../inputs/text-input';
+import { createContact, updateContact } from '../../contact-service';
 import { IContact, IContactResponse } from '@ux-studio-challenge/shared';
-import FileInput from './file-input';
-import PhoneInput from './phone-input';
+import FileInput from '../inputs/file-input';
+import PhoneInput from '../inputs/phone-input';
 
 interface ContactFormProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;

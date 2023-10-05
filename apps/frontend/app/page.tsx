@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { fetchContact } from './contact-service';
 import { IContactResponse } from '@ux-studio-challenge/shared';
-import Layout from './components/layout';
-import Contact from './components/contact';
-import ContactLoading from './components/contact-loading';
+import Layout from './components/layout/layout';
+import Contact from './components/contact/contact';
+import ContactLoading from './components/contact/contact-loading';
 import { Modal, Box, useMediaQuery } from '@mui/material';
-import ContactForm from './components/contact-form';
+import ContactForm from './components/contact/contact-form';
 
 const Page = () => {
   const matchesSM = useMediaQuery('(min-width:544px)');
