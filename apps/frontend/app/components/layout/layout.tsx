@@ -1,7 +1,7 @@
 import React, { useState, ReactNode } from 'react';
 import MaterialUIThemeProvider from '../theme-provider';
-import { Box, Grid, Modal, Theme, useTheme } from '@mui/material';
-import { lightTheme, darkTheme } from '../../style/theme';
+import { Box, Grid, Modal, Theme } from '@mui/material';
+import { lightTheme, darkTheme } from '../../theme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import ContactForm from '../contact/contact-form';
 import FirstRow from './first-row';

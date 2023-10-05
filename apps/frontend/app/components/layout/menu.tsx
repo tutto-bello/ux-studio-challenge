@@ -74,8 +74,6 @@ const Menu = ({
               width={24}
               height={24}
               style={{ borderRadius: '100%', objectFit: 'cover' }}
-              placeholder="blur"
-              blurDataURL="/assets/contact-default.png"
             />
           </IconButton>
           {matchesSM && (

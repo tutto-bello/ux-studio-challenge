@@ -17,6 +17,7 @@ const StyledButton = (props: ButtonProps) => {
       onClick={onClick}
       variant="contained"
       sx={{
+        width: matchesLg ? 120 : 'auto',
         borderRadius: 1000,
         backgroundImage:
           'linear-gradient(to bottom, #282828 70%, #3C3C3C 100%)',

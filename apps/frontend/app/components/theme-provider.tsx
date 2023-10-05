@@ -1,5 +1,9 @@
 import React from 'react';
-import { Theme, ThemeProvider } from '@mui/material/styles';
+import {
+  Theme,
+  ThemeProvider,
+  StyledEngineProvider,
+} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 const MaterialUIThemeProvider = ({
@@ -10,10 +14,12 @@ const MaterialUIThemeProvider = ({
   theme: Theme;
 }) => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

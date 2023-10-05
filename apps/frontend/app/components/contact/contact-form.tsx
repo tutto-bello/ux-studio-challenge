@@ -92,7 +92,7 @@ const ContactForm = (props: ContactFormProps) => {
               name="name"
               label="Name"
               type="text"
-              placeholder="Joh Doe"
+              placeholder="John Doe"
               value={values.name}
               handleChange={handleChange}
               form={{ errors: errors, touched: touched }}
@@ -119,8 +119,15 @@ const ContactForm = (props: ContactFormProps) => {
             />
 
             <Box mt={6} ml="auto" width="max-content">
-              <Button onClick={() => setOpen(false)}>Cancel</Button>
-              <Button disabled={isSubmitting} type="submit" variant="contained">
+              <Button onClick={() => setOpen(false)} sx={{ mr: '8px' }}>
+                Cancel
+              </Button>
+              <Button
+                disabled={isSubmitting}
+                type="submit"
+                variant="contained"
+                sx={{ minWidth: '68px' }}
+              >
                 {isSubmitting ? 'In progress..' : 'Done'}
               </Button>
             </Box>

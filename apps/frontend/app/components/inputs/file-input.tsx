@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Box, Button } from '@mui/material';
+import { Box, Button, useMediaQuery } from '@mui/material';
 import axios from 'axios';
 import { FormikErrors } from 'formik';
 import React, { useEffect, useState } from 'react';
@@ -8,6 +8,7 @@ import PlusIcon from '../icons/plus';
 import ChangeIcon from '../icons/change';
 import DeleteIcon from '../icons/delete';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
 
 const FileInput = ({
   setFieldValue,
@@ -32,8 +33,8 @@ const FileInput = ({
     favorite: boolean;
   };
 }) => {
+  const matchesSM = useMediaQuery('(min-width:544px)');
   const [selectedFile, setSelectedFile] = useState(null);
-
   const handleFileSelect = (event: any) => {
     const file = event.target.files[0];
     setSelectedFile(file);
@@ -46,10 +47,12 @@ const FileInput = ({
         formData
       )
       .catch((error) => {
+        toast.success(`Image upload error!`);
         console.log(error);
       });
 
     if (request) {
+      toast.success(`Image succesfully uploaded!`);
       setFieldValue('imgUrl', request.data.location);
     }
   };
@@ -79,7 +82,14 @@ const FileInput = ({
   }, [selectedFile]);
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: matchesSM ? 'center' : 'left',
+        mb: 2,
+        flexDirection: matchesSM ? 'row' : 'column',
+      }}
+    >
       <Image
         src={values.imgUrl ? values.imgUrl : '/assets/contact-default.png'}
         alt="Profil photo"
@@ -89,62 +99,65 @@ const FileInput = ({
           borderRadius: '100%',
           marginRight: '14px',
           objectFit: 'cover',
+          marginBottom: 8,
         }}
         placeholder="blur"
         blurDataURL="/assets/contact-default.png"
       />
-      <motion.div
-        whileHover={{
-          opacity: 0.8,
-          transition: { duration: 0.1 },
-        }}
-      >
-        <label
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: '8px 16px 8px 12px',
-            paddingLeft: 16,
-            borderRadius: 8,
-            backgroundColor: '#2D2D2D',
-            cursor: 'pointer',
-            fontSize: 14,
-            height: '40px',
-            color: 'white',
+      <Box sx={{ display: 'flex' }}>
+        <motion.div
+          whileHover={{
+            opacity: 0.8,
+            transition: { duration: 0.1 },
           }}
         >
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleFileSelect}
-            style={{ display: 'none' }}
-          />
-          {values.imgUrl ? (
-            <ChangeIcon mode="dark" />
-          ) : (
-            <PlusIcon mode={undefined} />
-          )}
-          <span style={{ marginLeft: 12 }}>
-            {values.imgUrl ? 'Change picture' : 'Add picture'}
-          </span>
-        </label>
-      </motion.div>
-      {values.imgUrl && (
-        <Button
-          onClick={handleDelete}
-          variant="contained"
-          sx={{
-            borderRadius: '8px',
-            padding: '8px',
-            marginLeft: '8px',
-            minWidth: '40px',
-            height: '40px',
-          }}
-        >
-          <DeleteIcon mode="dark" />
-        </Button>
-      )}
+          <label
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: '8px 16px 8px 12px',
+              paddingLeft: 16,
+              borderRadius: 8,
+              backgroundColor: '#2D2D2D',
+              cursor: 'pointer',
+              fontSize: 14,
+              height: '40px',
+              color: 'white',
+            }}
+          >
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileSelect}
+              style={{ display: 'none' }}
+            />
+            {values.imgUrl ? (
+              <ChangeIcon mode="dark" />
+            ) : (
+              <PlusIcon mode={undefined} />
+            )}
+            <span style={{ marginLeft: 12 }}>
+              {values.imgUrl ? 'Change picture' : 'Add picture'}
+            </span>
+          </label>
+        </motion.div>
+        {values.imgUrl && (
+          <Button
+            onClick={handleDelete}
+            variant="contained"
+            sx={{
+              borderRadius: '8px',
+              padding: '8px',
+              marginLeft: '8px',
+              minWidth: '40px',
+              height: '40px',
+            }}
+          >
+            <DeleteIcon mode="dark" />
+          </Button>
+        )}
+      </Box>
     </Box>
   );
 };

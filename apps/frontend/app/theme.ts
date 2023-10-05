@@ -79,9 +79,8 @@ const lightTheme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 8,
-          color: '#FFFFFF',
           textTransform: 'capitalize',
-          padding: '8px 16px 8px 12px',
+          padding: '8px 16px 8px 16px',
         },
       },
     },
@@ -231,7 +230,7 @@ const darkTheme = createTheme({
           borderRadius: 8,
           color: '#FFFFFF',
           textTransform: 'capitalize',
-          padding: '8px 16px 8px 12px',
+          padding: '8px 16px 8px 16px',
         },
       },
     },
